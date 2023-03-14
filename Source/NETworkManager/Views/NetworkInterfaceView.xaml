@@ -253,6 +253,22 @@
                                     </Grid>
                                 </Button.Content>
                             </Button>
+                            <Button Margin="0,0,10,0" Command="{Binding ScanIpCommand}" Style="{StaticResource ImageWithTextButton}">
+                                <Button.Content>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Rectangle Width="20" Height="20" Margin="10,5,0,5" Fill="{DynamicResource MahApps.Brushes.Gray3}">
+                                            <Rectangle.OpacityMask>
+                                                <VisualBrush Stretch="Uniform" Visual="{iconPacks:FontAwesome Kind=NetworkWiredSolid}" />
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                        <TextBlock Grid.Column="1" Text="{x:Static localization:Strings.IPScanner}" FontSize="14" Margin="10,5" TextAlignment="Center"/>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
                             <Button HorizontalAlignment="Left" Command="{Binding FlushDNSCommand}" IsEnabled="{Binding IsConfigurationRunning, Converter={StaticResource BooleanReverseConverter}}" Style="{StaticResource ImageWithTextButton}" Margin="0,0,10,0">
                                 <Button.Content>
                                     <Grid>

@@ -20,6 +20,8 @@ using MahApps.Metro.Controls;
 using NETworkManager.Profiles;
 using System.Windows.Threading;
 using NETworkManager.Models;
+using NETworkManager.Models.EventSystem;
+using NETworkManager.Converters;
 
 namespace NETworkManager.ViewModels;
 
@@ -682,6 +684,14 @@ public class NetworkInterfaceViewModel : ViewModelBase, IProfileManager
         OpenNetworkConnectionsAsync();
     }
     
+    public ICommand ScanIpCommand => new RelayCommand(p => ScanIpAction(), (paramter) => AdditionalCommands_CanExecute(paramter) && SelectedNetworkInterface.IPv4ProtocolAvailable);
+
+    public void ScanIpAction()
+    {
+        var ipv4Address = new IPAddressSubnetmaskTupleArrayToStringConverter().Convert(this.SelectedNetworkInterface.IPv4Address, null, null, null);
+        EventSystem.RedirectToApplication(ApplicationName.IPScanner, (string)ipv4Address);
+    }
+
     public ICommand FlushDNSCommand => new RelayCommand(p => FlushDNSAction(), AdditionalCommands_CanExecute);
 
     private void FlushDNSAction()
